@@ -1,10 +1,6 @@
 #ifndef _HELPERS_H_
 #define _HELPERS_H_
 
-#include "Point.h"
-#include "Vector.h"
-#include "boundingBox.h"
-#include "resourceWrappers.h"
 #include <cassert>
 #include <map>
 #include <thread>
@@ -115,8 +111,6 @@ namespace Colors
   inline unsigned int A( COLORS color ) { return static_cast<unsigned int>(color) & 0xff; }
 }
 
-void drawSphere( const Point<float>& center, float radius, COLORS color, QuadricWrapper* pQuadricWrapper);
-
 //Set that can at max contain a bounded max element. Uses arrays for faster checking of containment
 template < class T, class U, class Allocator = std::allocator<T> >
 class MaxElementHoldingSet
@@ -200,8 +194,6 @@ void transposeMatrix( T* pMatrix, int dim )
   }
 }
 
-Point<float> projectPoint(const Point<float>& point);  // Does this in opengl coordinate system (0 at bottom of screen)
-Point<float> unprojectPoint(int pointX, int pointY);  // Does this in non-opengl coordinate system (window coordinates)
 bool replace(std::string& str, const std::string& from, const std::string& to);
 
 template <typename Function>
@@ -212,17 +204,5 @@ void callAfter(long millis, Function const & function)
     function();
   }).detach();
 }
-
-class PointNormalPair
-{
-private:
-  Point<float> m_point;
-  Vector<float> m_normal;
-public:
-  PointNormalPair() {}
-  PointNormalPair(const Point<float>& point, const Vector<float>& normal) : m_point(point), m_normal(normal) {}
-  Point<float> point() const { return m_point; }
-  Vector<float> normal() const { return m_normal; }
-};
 
 #endif//_HELPERS_H_

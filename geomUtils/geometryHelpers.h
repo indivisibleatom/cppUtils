@@ -5,6 +5,23 @@
 #include "Mesh.h"
 #include <vector>
 
+
+Point<float> projectPoint( const Point<float>& point );  // Does this in opengl coordinate system (0 at bottom of screen)
+Point<float> unprojectPoint( int pointX, int pointY );  // Does this in non-opengl coordinate system (window coordinates)
+void drawSphere( const Point<float>& center, float radius, COLORS color, QuadricWrapper* pQuadricWrapper );
+
+class PointNormalPair
+{
+private:
+  Point<float> m_point;
+  Vector<float> m_normal;
+public:
+  PointNormalPair() {}
+  PointNormalPair( const Point<float>& point, const Vector<float>& normal ) : m_point( point ), m_normal( normal ) {}
+  Point<float> point() const { return m_point; }
+  Vector<float> normal() const { return m_normal; }
+};
+
 void Arrow2D(const Point<float>& tail, const Point<float>& head);
 
 template <class U>
