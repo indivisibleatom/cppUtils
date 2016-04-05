@@ -5,6 +5,7 @@
 #include <map>
 #include <thread>
 #include <chrono>
+#include <algorithm>
 
 const float PI = 3.14159265359f;
 

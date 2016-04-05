@@ -1,5 +1,3 @@
-cmake_minimum_required(VERSION 3.3)
-
 file(GLOB geomUtils_SRC
         "inc/*.h"
         "src/*.cpp")
