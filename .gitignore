@@ -4,3 +4,5 @@ build/
 #Ignore visual c++ for this cmake project
 *.vcxproj
 
+#Ignore generated files
+*_gen.h

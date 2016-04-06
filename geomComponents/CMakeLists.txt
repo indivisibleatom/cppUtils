@@ -1,10 +1,10 @@
-file(GLOB geomUtils_SRC
+file(GLOB geomComponents_SRC
         "inc/*.h"
         "src/*.cpp")
 
-add_library (geomUtils STATIC ${geomUtils_SRC})
+add_library (geomComponents STATIC ${geomComponents_SRC})
 
-target_include_directories (geomUtils PRIVATE
+target_include_directories (geomComponents PRIVATE
         "inc"
         "${cppUtils_SOURCE_DIR}/utils/inc"
         "${cppUtils_SOURCE_DIR}/renderUtils" #TODO msati3: Remove this
@@ -12,5 +12,5 @@ target_include_directories (geomUtils PRIVATE
 )
 
 include(CMakePrintHelpers)
-cmake_print_properties(TARGETS geomUtils PROPERTIES INCLUDE_DIRECTORIES)
+cmake_print_properties(TARGETS geomComponents PROPERTIES INCLUDE_DIRECTORIES)
 

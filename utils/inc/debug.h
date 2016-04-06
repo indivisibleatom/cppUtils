@@ -11,7 +11,17 @@ enum class DEBUG_LEVELS
   LOW
 };
 
+// TODO msati3: Look at logging architectures. Would want log level
+// configurable in build system
 const DEBUG_LEVELS DEBUG_LEVEL = DEBUG_LEVELS::LOW;
+
+inline void LOG_NO_DECORATIONS( const std::string& string, DEBUG_LEVELS debugLevel )
+{
+  if ( debugLevel >= DEBUG_LEVEL )
+  {
+    std::cout<<string<<"\n";
+  }
+}
 
 #define LOG( string, debugLevel ) \
 { \
@@ -35,14 +45,6 @@ const DEBUG_LEVELS DEBUG_LEVEL = DEBUG_LEVELS::LOW;
   { \
     LOG( string, debugLevel ) \
   } \
-}
-
-inline void LOG_NO_DECORATIONS( const std::string& string, DEBUG_LEVELS debugLevel )
-{ 
-  if ( debugLevel >= DEBUG_LEVEL )
-  {
-    std::cout<<string<<"\n";
-  }
 }
 
 #ifdef _DEBUG

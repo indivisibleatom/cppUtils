@@ -21,4 +21,4 @@ endif ()
 set (CMAKE_CXX_STANDARD 11)
 
 add_subdirectory (utils)
-add_subdirectory (geomUtils)
+add_subdirectory (geomComponents)
