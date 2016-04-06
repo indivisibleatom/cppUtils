@@ -4,9 +4,11 @@ file(GLOB geomUtils_SRC
 
 add_library (geomUtils STATIC ${geomUtils_SRC})
 
-target_include_directories (geomUtils PRIVATE 
+target_include_directories (geomUtils PRIVATE
         "inc"
         "${cppUtils_SOURCE_DIR}/utils/inc"
+        "${cppUtils_SOURCE_DIR}/renderUtils" #TODO msati3: Remove this
+                                             #dependency
 )
 
 include(CMakePrintHelpers)

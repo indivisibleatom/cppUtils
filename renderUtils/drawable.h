@@ -18,7 +18,7 @@ private:
 class IDrawable
 {
 public:
-  virtual ~IDrawable() = 0 {}
+  virtual ~IDrawable() = 0;
   IDrawable(const DrawingState& drawingState = DrawingState()) : m_fDrawingState(drawingState){}
   virtual void draw() = 0;
 

@@ -1,7 +1,7 @@
 #include "precomp.h"
 #include "geometryHelpers.h"
-#include "Rect.h"
-#include <FL\fl_draw.H>
+#include "rect.h"
+#include <FL/fl_draw.H>
 
 #define RADPERDEG 0.0174533
 #define WINGS 0.10

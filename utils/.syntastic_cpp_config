@@ -1,0 +1,4 @@
+#Global includes for syntastic -- ../inc for each source folder and
+#/usr/include for boost
+-I inc
+-I /usr/include/

@@ -1,8 +1,8 @@
 #ifndef _GEOMETRY_HELPERS_H_
 #define _GEOMETRY_HELPERS_H_
 
-#include "Vector.h"
-#include "Mesh.h"
+#include "vector.h"
+#include "mesh.h"
 #include <vector>
 
 
