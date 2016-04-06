@@ -1,7 +1,7 @@
 #ifndef _COLOR_H_
 #define _COLOR_H_
 
-#include "colorDefinitions.h"
+#include "colors_gen.h"
 
 class Color {
  public:
