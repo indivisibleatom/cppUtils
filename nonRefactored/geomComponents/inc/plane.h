@@ -4,7 +4,7 @@
 #include "Mesh.h"
 
 // TODO msati3: Clean up to not have Mesh as a templated class
-class Plane : public IDrawable, public IInteractable
+class PlaneGeomComponent : public IDrawable, public IInteractable
 {
 public:
   Plane( double a, double b, double c, double d ); // The plane equation ax + by + cz = d

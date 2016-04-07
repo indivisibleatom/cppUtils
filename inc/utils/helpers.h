@@ -2,6 +2,8 @@
 #define _HELPERS_H_
 
 #include "constants.h"
+#include "debug.h"
+
 #include "strHelpers.h"
 #include "numhelpers.h"
 #include "collectionHelpers.h"

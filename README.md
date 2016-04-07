@@ -4,3 +4,6 @@ Generic C++ libraries for functionality shared across applications. Currently ha
 * Scenegraph and render logic
 * Collection utilities for operations on collections
 
+External dependencies:
+* Boost -- works with 1.5.4
+* Google test

@@ -20,5 +20,5 @@ endif ()
 #Some global flags
 set (CMAKE_CXX_STANDARD 11)
 
-add_subdirectory (utils)
-add_subdirectory (geomComponents)
+add_subdirectory (src)
+add_subdirectory (test)
