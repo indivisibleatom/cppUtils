@@ -10,19 +10,20 @@
 
 #include "mathUtils/vectorSpace.h"
 
-// template <typename T>
-// class Vector;
+template <typename T, size_t N>
+class Vector;
 
 template <class T, size_t N>
 class Point {
  protected:
   std::array<T, N> m_x;
 
+ private:
   void swap(Point& other) { std::swap(m_x, other.m_x); }
 
  public:
   Point() : m_x() {}
-
+  Point(Point&& other) : m_x(std::move(other.m_x)) {}
   Point(const std::array<T, N>& x) : m_x(x) {}
   Point(const Point& other) : m_x(other.m_x) {}
 
@@ -44,16 +45,16 @@ class Point {
             points, denominators);
   }
 
-  /*Point(const Point& point, T s, const Vector<T>& vector) {
+  Point(const Point& point, T s, const Vector<T>& vector) {
     swap(bilinearCombination(point, vector, 1, s));
-  }*/
+  }
 
   // Point + s ( other - point)
-  /*Point(const Point& point, float s, const Point& other) throw() {
+  Point(const Point& point, float s, const Point& other) throw() {
     Vector<T> vector(point, other);
     Point temp(point, s, vector);
     swap(temp);
-  }*/
+  }
 
   // Point + sum(s[i] * v[i])
   /*Point(const Point& point, std::vector<T> s, const std::vector<Vector<T>>& v)
@@ -72,12 +73,6 @@ class Point {
 
     explicit dimension_iterator(const BaseIterType& iter)
         : dimension_iterator::iterator_adaptor_(iter) {}
-
-    /*private:
-     friend class boost::iterator_core_access;
-     typename dimension_iterator::reference dereference() const {
-       return *this->base();
-     }*/
   };
 
   // Advertise self as container
@@ -93,17 +88,17 @@ class Point {
   const T& operator[](size_t xi) const { return m_x[xi]; }
   T& operator[](size_t xi) { return m_x[xi]; }
 
-  Point& set(std::vector<T>& x) {
+  Point& set(std::array<T,N>& x) {
     m_x = x;
     return *this;
   }
 
-  Point& set(const Point& other) throw() {
+  Point& set(const Point& other) {
     m_x = other.m_x;
     return *this;
   }
 
-  T distance2(const Point& other) const throw() {
+  T distance2(const Point& other) const {
     auto iterBegin =
         boost::make_zip_iterator(boost::make_tuple(cbegin(), other.cbegin()));
     auto iterEnd =

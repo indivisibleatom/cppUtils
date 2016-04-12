@@ -8,12 +8,26 @@
 
 #include "utils/collectionHelpers.h"
 
+// Return a * V
+template <typename RetType, typename InputType>
+RetType scale(const InputType& input, typename InputType1::value_type scale) {
+  static_assert(is_iterable<InputType>::value &
+                    is_iterable<RetType>::value,
+                "The input type and return type must be iterable");
+  RetType retValue;
+  auto iter = retValue.begin();
+  for (x : input) {
+    *iter = scale * x;
+    ++iter;
+  }
+  return retValue;
+}
+
 // Return f_1 * V + f_2 * U.
 template <typename RetType, typename InputType1, typename InputType2>
-static RetType bilinearCombination(
-    const InputType1& val1, const InputType2& val2,
-    typename InputType1::value_type fieldCoeff1,
-    typename InputType2::value_type fieldCoeff2) {
+RetType bilinearCombination(const InputType1& val1, const InputType2& val2,
+                            typename InputType1::value_type fieldCoeff1,
+                            typename InputType2::value_type fieldCoeff2) {
   static_assert(is_iterable<InputType1>::value &
                     is_iterable<InputType2>::value &
                     is_iterable<RetType>::value,
@@ -38,8 +52,8 @@ static RetType bilinearCombination(
 
 // Result sum(f_i * V_i)
 template <typename RetType, typename InputType, typename FieldType>
-static RetType multilinearCombination(const InputType& vals,
-                                      const FieldType& fieldCoeffs) {
+RetType multilinearCombination(const InputType& vals,
+                               const FieldType& fieldCoeffs) {
   static_assert(is_iterable<InputType>::value & is_iterable<RetType>::value &
                     is_iterable<FieldType>::value,
                 "InputType, ReturnType and FieldType must be iterable");
@@ -63,12 +77,24 @@ static RetType multilinearCombination(const InputType& vals,
 }
 
 //------------Specialize for fixed size containers for speed------------------
+// Scale
+template <typename RetType, typename InputType, size_t N>
+RetType scale(const InputType& input, typename InputType::value_type scale) {
+  static_assert(is_iterable<InputType>::value &
+                    is_iterable<RetType>::value,
+                "The input type and return type must be iterable");
+  RetType retValue;
+  for (int i = 0; i < N; ++i) {
+    retValue[i] = scale * input[i];
+  }
+  return retValue;
+}
+
 // Return f_1 * V + f_2 * U.
 template <typename RetType, typename InputType1, typename InputType2, size_t N>
-static RetType bilinearCombination(
-    const InputType1& val1, const InputType2& val2,
-    typename InputType1::value_type fieldCoeff1,
-    typename InputType1::value_type fieldCoeff2) {
+RetType bilinearCombination(const InputType1& val1, const InputType2& val2,
+                            typename InputType1::value_type fieldCoeff1,
+                            typename InputType1::value_type fieldCoeff2) {
   static_assert(is_iterable<InputType1>::value &
                     is_iterable<InputType2>::value &
                     is_iterable<RetType>::value,
@@ -82,8 +108,8 @@ static RetType bilinearCombination(
 
 // Result sum(f_i * V_i)
 template <typename RetType, typename InputType, typename FieldType, size_t N>
-static RetType multilinearCombination(const InputType& vals,
-                                      const FieldType& fieldCoeffs) {
+RetType multilinearCombination(const InputType& vals,
+                               const FieldType& fieldCoeffs) {
   static_assert(is_iterable<InputType>::value & is_iterable<RetType>::value &
                     is_iterable<FieldType>::value,
                 "InputType, ReturnType and FieldType must be iterable");
