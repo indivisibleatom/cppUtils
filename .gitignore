@@ -6,3 +6,4 @@ build/
 
 #Ignore generated files
 *_gen.h
+*CMakeLists.txt~

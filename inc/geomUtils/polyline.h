@@ -1,9 +1,11 @@
 #ifndef _POLYLINE_H_
 #define _POLYLINE_H_
 
-#include <boost/iterator_adaptor>
+#include <boost/iterator_adaptors.hpp>
 
-template <class T>
+#include "point.h"
+
+template <typename T>
 class Polyline {
  public:
   Polyline();
@@ -15,7 +17,7 @@ class Polyline {
   virtual ~Polyline() {}
 
   class iterator
-      : public boost::iterator_adaptor<Polyline::iterator,
+      : public boost::iterator_adaptor<iterator,
                                        std::vector<Point<T>>::iterator> {
    public:
     iterator() : iterator::iterator_adaptor_() {}
@@ -26,12 +28,11 @@ class Polyline {
 
  private:
   std::vector<Point<T>> m_points;
-  bool m_fClosed;
 };
 
 // Convenience class for closed polylines
-template <class T>
-class ClosedPolyline : public Polyline<T> {};
+// template <class T>
+// class ClosedPolyline : public Polyline<T> {};
 
 /*class PolylineFactory {
  public:

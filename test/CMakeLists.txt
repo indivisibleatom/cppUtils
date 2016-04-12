@@ -1,4 +1,4 @@
-file(GLOB GEOMUTILS_TEST_SOURCE_FILES "geomUtils/*.cpp")
+set(GEOMUTILS_TEST_SOURCE_FILES "geomUtils/pointTest.cpp")
 
 add_executable(cppUtilsTest
   main.cpp

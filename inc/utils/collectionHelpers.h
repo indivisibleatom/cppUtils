@@ -6,14 +6,29 @@
 #include <algorithm>
 #include <cassert>
 
+// Is iterable type trait
+template <typename T>
+struct is_iterable {
+  typedef long false_type;
+  typedef char true_type;
+
+  template <typename C>
+  static false_type check(...);
+
+  template <typename C>
+  static true_type check(int, typename C::const_iterator = T().end());
+
+  enum { value = sizeof(check<T>(0)) == sizeof(true_type) };
+};
+
 // Cyclically permutes towards the left a data of type that is indexable
 // TODO msati3: Is this the best. Enforce the fact that T is indexable
-template <class T>
+template <typename T>
 void cyclicallyPermute(T* pData, std::size_t size, int leftShiftAmount) {
   if (leftShiftAmount == 0) {
-    return
+    return;
   }
-  int tIndex = (size - leftShiftAmount) % size;
+  int nextIndex = (size - leftShiftAmount) % size;
   int currentIndex = 0;
 
   T prevData = pData[currentIndex];
@@ -52,7 +67,7 @@ void populateReverseMap(std::vector<U>& outputMap,
                 });
 }
 
-//Populate a histogram of counts of each value in a vector
+// Populate a histogram of counts of each value in a vector
 template <class T>
 std::map<T, int> computeHistogram(const std::vector<T>& values) {
   std::map<T, int> retVal;
