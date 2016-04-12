@@ -24,7 +24,6 @@ class Point {
   Point() {}
 
   Point(const std::array<T, N>& x) : m_x(x) {}
-
   Point(const Point& other) : m_x(other.m_x) {}
 
   Point& operator=(Point other) {
@@ -60,9 +59,36 @@ class Point {
     swap(bilinearCombination(point, resVector, 1, 1));
   }*/
 
-  Point diff(const Point& other) {
-    return (bilinearCombination<Point, Point, Point, T>(this, other, 1, -1));
-  }
+  // Iterator interface for point dimensions
+  template <typename ContainedType>
+  class dimension_iterator
+      : public boost::iterator_adaptor<
+            dimension_iterator<ContainedType>,
+            typename std::vector<ContainedType>::iterator> {
+    typedef typename std::vector<ContainedType>::iterator BaseType;
+
+   public:
+    dimension_iterator() : dimension_iterator::iterator_adaptor_(0) {}
+
+    explicit dimension_iterator(const BaseType iter)
+        : dimension_iterator::iterator_adaptor_(iter) {}
+
+   private:
+    friend class boost::iterator_core_access;
+    typename dimension_iterator::reference dereference() const {
+      return this->base();
+    }
+  };
+
+  typedef dimension_iterator<T> iterator;
+  typedef dimension_iterator<const T> const_iterator;
+  typedef T value_type;
+
+  iterator begin() { return iterator(m_x.begin()); }
+  iterator end() { return iterator(m_x.end()); }
+  const_iterator cbegin() const { return const_iterator(m_x.cbegin()); }
+  const_iterator cend() const { return const_iterator(m_x.cend()); }
+  T& operator[](size_t xi) { return m_x[xi]; }
 
   Point& set(std::vector<T>& x) {
     m_x = x;

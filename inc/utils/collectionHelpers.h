@@ -16,7 +16,7 @@ struct is_iterable {
   static false_type check(...);
 
   template <typename C>
-  static true_type check(int, typename C::const_iterator = T().end());
+  static true_type check(int, typename C::const_iterator = T().cend());
 
   enum { value = sizeof(check<T>(0)) == sizeof(true_type) };
 };
